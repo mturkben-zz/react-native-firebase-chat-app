@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View,} from "react-native"
+import {Text, View, ActivityIndicator} from "react-native"
 import {mainStyle} from "../stylesheet";
 import * as Font from "expo-font"
 
@@ -38,8 +38,15 @@ const SplashScreen = ({navigation}) => {
 	
 	
 	return (
-		<View style={mainStyle.container}>
+		<View style={[mainStyle.container,{
+			display: "flex",
+			justifyContent: "center",
+			alignItems: "center"
+		}]}>
 			<Text> React-Native Firebase Chat App </Text>
+			{
+				load ? null : <ActivityIndicator/>
+			}
 		</View>
 	)
 }

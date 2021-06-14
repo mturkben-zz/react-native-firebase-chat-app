@@ -58,12 +58,10 @@ const LoginScreen = ({navigation}) => {
 	
 	const signUp = async () => {
 		try {
-			const sign = await auth.signInWithEmailAndPassword(loginData.email, loginData.password);
-			console.log(sign.user.uid)
+			await auth.signInWithEmailAndPassword(loginData.email, loginData.password);
 		} catch (e) {
 			showAlert(e.code,e.message)
 		}
-		const u_token = await user.getIdToken(false)
 		
 		setLoginData({})
 		

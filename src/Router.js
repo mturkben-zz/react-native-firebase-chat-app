@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import {LoginScreen,SplashScreen,HomeScreen} from "./pages"
 
+import Header from "./components/Header";
+
 const Router = () => {
 	const Stack = createStackNavigator();
 	
@@ -16,7 +18,14 @@ const Router = () => {
 				}}
 			>
 				<Stack.Screen name="SplashScreen" component={SplashScreen} />
-				<Stack.Screen name="HomeScreen" component={HomeScreen} />
+				<Stack.Screen 
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{
+            headerShown: true,
+            header: (...args) => <Header data={args}/>
+          }} 
+        />
 				<Stack.Screen name="LoginScreen" component={LoginScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>

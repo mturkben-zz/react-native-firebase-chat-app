@@ -9,5 +9,8 @@ npm-debug.*
 *.orig.*
 web-build/
 
+# Key Store
+assets/android/
+
 # macOS
 .DS_Store
