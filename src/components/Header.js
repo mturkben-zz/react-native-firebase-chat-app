@@ -6,7 +6,7 @@ import { StatusBar } from "expo-status-bar";
 const Header = ({data}) => {
 
   const navigation = data[0].navigation;
-  const user = auth.currentUser;
+  const user = auth.currentUser !== undefined ? auth.currentUser : null;
 
   const style = {
     header: {

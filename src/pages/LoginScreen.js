@@ -34,7 +34,10 @@ const LoginScreen = ({navigation}) => {
 	const textAnim = new Animated.Value(0);
 	const [page, setPage] = useState(true);
 	
-	const [loginData, setLoginData] = useState({});
+	const [loginData, setLoginData] = useState({
+		email: "turkben346@gmail.com",
+		password: "123123"
+	});
 	const [signData, setSignData] = useState({});
 	
 	
@@ -60,7 +63,8 @@ const LoginScreen = ({navigation}) => {
 		try {
 			await auth.signInWithEmailAndPassword(loginData.email, loginData.password);
 		} catch (e) {
-			showAlert(e.code,e.message)
+			await showAlert(e.code,e.message)
+			return false
 		}
 		
 		setLoginData({})
@@ -80,17 +84,16 @@ const LoginScreen = ({navigation}) => {
 		} catch (e) {
 			showAlert(e.code, e.message)
 		}
-		
-		if (user) {
-			user.updateProfile({
-				displayName: signData.nickname,
-			}).catch(e => {
-				showAlert(e.code, e.message)
-			}).then(()=> {
-				ref.scrollTo({x: 0, y: 0, animated: true})
-				ToastAndroid.show("Successfuly",ToastAndroid.LONG)
-			});
-		}
+		console.log(user);
+		user.updateProfile({
+			displayName: signData.nickname,
+		}).catch(e => {
+			showAlert(e.code, e.message)
+			return false;
+		}).then(()=> {
+			ref.scrollTo({x: 0, y: 0, animated: true})
+			ToastAndroid.show("Successfuly",ToastAndroid.LONG)
+		});
 		
 	}
 	
@@ -129,7 +132,7 @@ const LoginScreen = ({navigation}) => {
 						<View style={style.items}>
 							<TextInput
 								style={style.inputs}
-								value={loginData.username}
+								value={loginData.email}
 								onChangeText={val => setLoginData({...loginData, email: val})}
 								placeholder="E-mail"
 								keyboardType="email-address"
